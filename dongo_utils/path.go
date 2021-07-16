@@ -1,4 +1,4 @@
-package dongoutils
+package dongo_utils
 
 import (
 	"fmt"
