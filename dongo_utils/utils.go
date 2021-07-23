@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
+	"regexp"
 )
 
 // 检查错误
@@ -31,15 +31,6 @@ func Pause() {
 	fmt.Print("程序退出...")
 }
 
-//获取int64 获取毫秒
-func Tick(t ...time.Time) int64 {
-	if len(t) == 0 {
-		return time.Now().UnixNano() / 1e6
-	} else {
-		return t[0].UnixNano() / 1e6
-	}
-}
-
 // 转换json
 func ToJson(i interface{}) string {
 	data, err := json.Marshal(i)
@@ -48,4 +39,16 @@ func ToJson(i interface{}) string {
 	}
 
 	return string(data)
+}
+
+// 正则检查
+func RegexpString(token string) bool {
+	matched, err := regexp.MatchString(`^[A-Za-z0-9]{64}$`, token)
+	if err != nil {
+		fmt.Println(err.Error())
+		return false
+	} else {
+		fmt.Println(token, " result :", matched)
+		return matched
+	}
 }
