@@ -61,14 +61,14 @@ func TestSome(t *testing.T) {
 	t1, err := dongo_utils.ParseTimeByTimeStr(timeStr, parseTimeReason)
 	if err != nil {
 		t.Log(err.Error())
-		dongo_utils.Catch(err)
+		dongo_utils.Chk(err)
 	}
 	t.Log(t1)
 
 	//获取int64的时间戳
-	time1 := dongo_utils.Tick()
+	time1 := dongo_utils.Tick64()
 	t.Log("当前时间:", time1)
-	time2 := dongo_utils.Tick(t1)
+	time2 := dongo_utils.Tick64(t1)
 	t.Log("2019-01-02 15:04:05转换时间:", time2)
 
 	now := time.Now()
@@ -85,7 +85,7 @@ func TestSome(t *testing.T) {
 	time6 := dongo_utils.ParseYesterdayTime(now)
 	t.Log(time6)
 	//把int64转换成1993-12-26 10:30:00
-	time7 := dongo_utils.Tick(time6)
+	time7 := dongo_utils.Tick64(time6)
 	timeStr2 := dongo_utils.ParseTimeToString(time7)
 	t.Log(timeStr2)
 }
