@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// 键值对
 var m map[interface{}]interface{}
 var mu sync.RWMutex
 
@@ -18,12 +19,14 @@ func Put(key, value string) {
 	mu.Unlock()
 	fmt.Println(fmt.Sprintf("key:%v value:%v option:%v", key, value, "create"))
 }
+
 func Delete(key string) {
 	mu.Lock()
 	delete(m, key)
 	mu.Unlock()
 	fmt.Println(fmt.Sprintf("key:%v: option:%v", key, "delete"))
 }
+
 func Get(key string) interface{} {
 	mu.Lock()
 	val, ok := m[key]

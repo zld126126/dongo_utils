@@ -10,6 +10,7 @@ import (
 	"github.com/tuotoo/qrcode"
 )
 
+// 创建二维码
 func CreateQrCode(fileName, content string) {
 	qrCode, _ := qr.Encode(content, qr.M, qr.Auto)
 
@@ -21,6 +22,7 @@ func CreateQrCode(fileName, content string) {
 	png.Encode(file, qrCode)
 }
 
+// 加载二维码
 func LoadQrCode(fileName, content string) {
 	fi, err := os.Open(fileName)
 	if err != nil {

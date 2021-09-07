@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// 内存容器
 type Memory struct {
 	Name  string       //内存容器名
 	Items []MemoryItem //多个项
@@ -14,6 +15,19 @@ type MemoryItem struct {
 	Ct   int64       //创建时间
 	Et   int64       //过期时间
 	Item interface{} //扩展变量
+}
+
+func NewMemory(name string) *Memory {
+	t := &Memory{
+		Name: name,
+	}
+	go func() {
+		for {
+			t.Repair(time.Now().Unix())
+			time.Sleep(time.Second)
+		}
+	}()
+	return t
 }
 
 func (p *Memory) Put(newItem interface{}) bool {

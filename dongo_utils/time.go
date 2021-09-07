@@ -87,7 +87,7 @@ func ParseTimeToYearMonthDay(time time.Time) string {
 }
 
 //获取int64 获取毫秒
-func Tick(t ...time.Time) int64 {
+func Tick64(t ...time.Time) int64 {
 	if len(t) == 0 {
 		return time.Now().UnixNano() / 1e6
 	} else {

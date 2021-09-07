@@ -2,13 +2,14 @@ package dongo_utils
 
 import (
 	"errors"
-	"fmt"
+
+	"github.com/sirupsen/logrus"
 )
 
 //捕获异常 error
-func Catch(err error) {
+func Chk(err error) {
 	if err != nil {
-		panic(err)
+		Panic(err)
 	}
 }
 
@@ -23,10 +24,8 @@ func Panic(p interface{}) (err error) {
 	 *结果状态.
 	 */
 	defer func() {
-
 		if r := recover(); r != nil {
-
-			fmt.Println("Recovered in PanicError", r)
+			logrus.Println("Recovered in PanicError", r)
 
 			//check exactly what the panic was and create error.
 			switch x := r.(type) {
@@ -38,9 +37,7 @@ func Panic(p interface{}) (err error) {
 				err = errors.New("Unknow PanicError")
 			}
 		}
-
 	}()
-
 	panic(p)
 
 	//return nil
